@@ -6,7 +6,7 @@
         <div class="row justify-content-center">
             <div class="col-8">
                 @include('partials.errors')
-                <form action="{{ route('admin.projects.store') }}" method="POST">
+                <form action="{{ route('admin.projects.store') }}" method="POST" enctype="multipart/form-data">
                     @csrf
                     <div class="form-group mb-3">
                         <label for="title">Titolo</label>
@@ -20,6 +20,25 @@
                                 {{ $message }}
                             </div>
                         @enderror
+                    </div>
+
+                    {{-- Cover --}}
+                    <div class="form-group mb-3">
+                        <label for="cover_image">Immagine</label>
+                        <input type="file" name="cover_image" id="cover_image"
+                            class="form-control @error('cover_image')
+                            is-invalid
+                        @enderror">
+                        @error('cover_image')
+                            <div class="invalid-feedback">
+                                {{ $message }}
+                            </div>
+                        @enderror
+
+                        {{-- Image preview --}}
+                        <div class="mt-3">
+                            <img id="image_preview" src="" alt="" style="max-height: 200px">
+                        </div>
                     </div>
 
                     <div class="form-group mb-3">
